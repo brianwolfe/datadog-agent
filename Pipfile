@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+invoke = "==1.4.1"
+reno = "==3.1.0"
+docker = "==3.7.3"
+requests = "==2.23.0"
+toml = "==0.9.4"
+PyYAML = "==5.3.1"
+
+[requires]
+python_version = "3.8"
