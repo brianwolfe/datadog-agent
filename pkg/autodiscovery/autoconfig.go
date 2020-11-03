@@ -564,6 +564,11 @@ func GetResolveWarnings() map[string][]string {
 // processNewService takes a service, tries to match it against templates and
 // triggers scheduling events if it finds a valid config for it.
 func (ac *AutoConfig) processNewService(svc listeners.Service) {
+	old := ac.store.getServiceForEntity(svc.GetEntity())
+	if old != nil {
+		ac.processDelService(old)
+	}
+
 	// in any case, register the service and store its tag hash
 	ac.store.setServiceForEntity(svc, svc.GetEntity())
 	ac.store.setTagsHashForService(
