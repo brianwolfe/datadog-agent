@@ -283,10 +283,15 @@ func (l *KubeletListener) createService(entity string, pod *kubelet.Pod, firstRu
 	}
 
 	l.m.Lock()
-	l.services[entity] = &svc
+	_, p := l.services[entity]
+	if !p {
+		l.services[entity] = &svc
+	}
 	l.m.Unlock()
 
-	l.newService <- &svc
+	if !p {
+		l.newService <- &svc
+	}
 }
 
 // podHasADTemplate looks in pod annotations and looks for annotations containing an
